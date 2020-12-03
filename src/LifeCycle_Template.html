@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="vue.js" type="text/javascript"></script>
+	<title></title>
+</head>
+<body>
+	<div id="app" v-once>
+			{{msg}}
+			<p>Using mustaches: {{rawHtml}}</p>
+			<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+		<div v-bind:class="color">test....</div>
+		<p>{{number + 1}}</p>
+		<p>{{ok ? 'Yes' : 'No'}}</p>
+		<p>{{message.split('').reverse().join('')}}</p>
+	</div>
+<script type="text/javascript">
+var vm = new Vue({
+	el: '#app',
+	data: {
+		msg: "Hi, Vue!",
+		rawHtml: '<span style="color:red">this should be red</span>',
+		color: 'blue',
+		number: 1,
+		ok: false,
+		message: "Vue"
+	},
+	// 实例化之后，事件订阅之前
+	beforeCreate: function() {
+		console.log('beforeCreate');
+	},
+	// 实例创建完成，数据观测，事件回调订阅之后
+	created: function() {
+		console.log('created');
+	},
+	// 挂载之前，页面渲染之后调用
+	beforeMount: function() {
+		console.log('beforeMount');
+	},
+	mounted: function() {
+		console.log('mounted');
+	},
+	beforeUpdate: function() {
+		console.log('beforeUpdate');
+	},
+	updated: function() {
+		console.log('updated');
+	},
+	activated: function() {
+		console.log('activated');
+	},
+	deactivated: function() {
+		console.log('deactivated');
+	},
+	beforeDestory: function() {
+		console.log('beforeDestory');
+	},
+	destroyed: function() {
+		console.log('destroyed');
+	},
+	errorCaptured: function() {
+		console.log('errorCaptured');
+	}
+});
+
+// vm.$destroy();
+setTimeout(function(){
+	vm.$data.msg = "Vue Changed";
+}, 3000);
+</script>
+<style type="text/css">
+.red{color:red;}
+.blue{color:blue; font-size:100px;}
+</style>
+</body>
+</html>
