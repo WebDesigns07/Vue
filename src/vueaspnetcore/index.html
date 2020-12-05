@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .text-red {
+            color: red;
+        }
+
+        .text-green {
+            color: green
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+        <br>
+        {{info}}
+        <br>
+        {{champion}}
+        <br>
+        <label v-show="show === 'sdaasddas'">This message is showed</label>
+        <br>
+        <button v-on:click="user = { name: 'Jack' }, show1 = !show1">Toggle</button>
+        <br>
+        <!-- 此处不能用show，show是预先绘制，此时user还是null会异常 -->
+        <label v-if="user">{{user.name}}</label>
+        <ul>
+            <li>
+                <input v-model="message">
+            </li>
+            <li>
+                <input v-bind:value="message" v-on:input="message = $event.target.value">
+            </li>
+            <li>
+                <input v-bind:value="message">
+            </li>
+            <li>
+                <button @click="onclick">OK</button>
+            </li>
+        </ul>
+        <ul>
+            <li v-for="item,index in users">
+                <span v-bind:class="{'text-red': item.color === 'red','text-green': item.color === 'green'}">{{item.name}}</span>
+            </li>
+        </ul>
+        <span-component v-if="show1"></span-component>
+        <span-component1 v-on:myclick1="log1($event, $event.value)"  v-bind:items="users"></span-component1>
+        <ul>
+            <li v-for="item,index in users">
+                <span-component2 v-bind:index="index" v-bind:item="item"></span-component2>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('span-component', {
+            template: '<span>Hello WOrld！</span>',
+            created(){
+                console.log('created');
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy');
+            },
+        });
+        
+        // Vue.component('span-component1', {
+        //     //template: '<ul><li v-for="item,index in users"><span v-bind:class="{\'text-red\': item.color === \'red\',\'text-green\': item.color === \'green\'}">{{item.name}}</span></li></ul>'
+        //     template: "<ul><li v-for=\"item,index in users\"><span v-bind:class=\"{'text-red': item.color === 'red','text-green': item.color === 'green'}\">{{item.name}}</span></li></ul>"
+        // });
+        Vue.component('span-component1', {
+            props: [ 'items'],
+            template: '<ul><li v-for="item,index in items"><span v-on:click="myclick(index)" v-bind:class="{\'text-red\': item.color === \'red\',\'text-green\': item.color === \'green\'}">{{item.name}}</span></li></ul>',
+            methods:{
+                myclick: function(v){
+                    this.$emit('myclick1', { value: v });
+                }
+            }
+        });
+        Vue.component('span-component2', {
+             props: [ 'item', 'index' ],
+             template: "<span v-bind:class=\"{'text-red': item.color === 'red','text-green': item.color === 'green'}\">{{item.name}}</span>"
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello World1!',
+                listinfo: [
+                    "1:Jack",
+                    "2:Mick",
+                    "3:Jane",
+                ],
+                show: "sdaasddas",
+                show1: true,
+                user: null,
+                users: [
+                    { name: 'jack', color: 'red' },
+                    { name: 'mick', color: 'green' },
+                    { name: 'mark', color: 'green' },
+                ]
+            },
+            methods: {
+                onclick() {
+                    alert(this.message);
+
+                    var calllog = () => {
+                        this.log();
+                    };
+
+                    calllog();
+                },
+                log() {
+                    console.log(this.message);
+                },
+                log1(e1, e2) {
+                    console.log(e1);
+                    console.log(e2);
+                }
+            },
+            computed: {
+                info: function () {
+                    return this.message + '11111115';
+                },
+                champion: function () {
+                    return this.listinfo.filter(x => {
+                        return x.indexOf('1') === 0;
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
