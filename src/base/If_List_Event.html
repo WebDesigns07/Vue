@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="main">
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else>
+            Other
+        </div>
+        <h1 v-show="ok">Hello!</h1>
+        <ul>
+            <li v-for="item,index in items" :key="index">
+                {{index}}:{{item.message}}
+            </li>
+            <li v-for="item,key in objects" :key="key">
+                {{key}}={{item}}
+            </li>
+        </ul>
+        <button v-on:click="counter += 1">值：{{counter}}</button>
+        <button v-on:dblclick="greet('abc', $event)">Greet</button>
+    </div>
+
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#main',
+            data: {
+                message: 'Hello, Vue!',
+                type: 'D',
+                ok: 1,
+                items: [
+                    { message: 'Foo'},
+                    { message: 'Bar'},
+                ],
+                objects: {
+                    title: 'Title',
+                    message: "Message",
+                },
+                counter: 0
+            },
+            methods: {
+                greet: function(str, e){
+                    alert(str + this.counter.toString());
+                    console.log(e);
+                }
+            }
+        });
+
+        vm.items[0].message = "Moo";
+        vm.objects.title="I'm Title";
+    </script>
+</body>
+</html>

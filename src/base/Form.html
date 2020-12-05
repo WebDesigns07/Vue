@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="body">
+        <input v-model="value">
+        <p>Message: {{value}}</p>
+        <input type="checkbox" name="c0" value="checkme0" v-model="check1">
+        <label for="c0">C0</label>
+        <input type="checkbox" name="c1" value="checkme1" v-model="check1">
+        <label for="c1">C1</label>
+        <p>Checked: {{check1}}</p>
+        <br>
+        <input type="radio" name="c5" id="c5" value="pickme5" v-model="pick">
+        <label for="c5">PickMe5</label>
+        <input type="radio" name="c6" id="c6" value="pickme6" v-model="pick">
+        <label for="c6">PickMe6</label>
+        <br>
+        <span>
+            Pick me: {{pick}}
+        </span>
+        <br>
+        <button @click="submit">OK</button>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#body',
+            data:{
+                message: 'Hello World!',
+                value: '',
+                check1: [ 'checkme0'],
+                pick:"pickme5",
+            },
+            methods:{
+                submit: function(){
+                    alert(this.pick);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
