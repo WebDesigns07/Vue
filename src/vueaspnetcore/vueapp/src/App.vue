@@ -1,47 +1,68 @@
 <template>
   <div id="app">
-    <div class="test-input">
-      <label>First Name</label>
-      <input v-model="firstName">
-    </div>
-    <div>{{firstName}}</div>
-  <div class="validation">
-    {{inputCount}}/{{textLimit}}
-  </div>
+    <TextField v-model="firstName" label="First Name" textLimit="15"></TextField>
+    <TextField v-model="secondName" label="Second Name" :textLimit="15"></TextField>
+
+    <SelectField 
+    label="Gender" 
+    v-model="gender" 
+    placeholder="Select Your Gender" 
+    :options="genderList">
+    </SelectField>
+
+    <SelectField 
+    label="Age" 
+    v-model="age" 
+    placeholder="Select Your Age" 
+    :options="ageList">
+    </SelectField>
+
+      <div>
+        {{gender}} - {{age}}
+      </div>
   </div>
 </template>
 
 <script>
+import TextField from "./components/TextField";
+import SelectField from "./components/SelectField";
+
 export default {
   name: "App",
-  data(){
+  data() {
     return {
       firstName: "",
-      textLimit: 15
-    }
+      secondName: "",
+      gender: "",
+      age: ""
+    };
   },
-  components: {},
-  computed:{
-    inputCount(){
-      return this.firstName.length;
+  components: {
+    TextField,
+    SelectField
+  },
+  computed: {
+    fullName(){
+      return this.firstName + " " + this.secondName;
+    },
+    genderList(){
+      return [
+        { value:"0", text:"Male"},
+        { value:"1", text:"Female"},
+        { value:"2", text:"Other"} 
+      ];
+    },
+    ageList(){
+      let result = [];
+      for (let i = 16; i < 65; i++) result.push({ value: i, text: i });
+      return result;
     }
   }
 };
 </script>
 
 <style lang="stylus">
-#app 
-  margin-top 60px
-
-.text-input
-  label
-    display block
-
-  input
-    display block
-    width 100%
-
-  .validation
-    text-align right
-    font-size 12px
+#app {
+  margin-top: 60px;
+}
 </style>
