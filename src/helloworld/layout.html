@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <div id="div-block">
+                <div id="div-name">
+                    <label>网口</label>
+                </div>
+
+                <select id="sel-value">
+                    <option value="192.168.144.1">192.168.144.1</option>
+                    <option value="192.168.229.1">192.168.144.1</option>
+                    <option value="192.168.128.1">192.168.144.1</option>
+                </select>
+            </div>
+
+            <div id="div-block">
+                <div id="div-name">
+                    <label>指定端口</label>
+                </div>
+
+                <input id="ele-value" type="text" value="47808">
+            </div>
+
+            <br><br>
+            <br><br>
+        </div>
+
+        <div>
+            <div id="div-block">
+                <div id="div-name">
+                    <label>扫描方式</label>
+                </div>
+
+                <div id="div-scantype">
+                    <input type="radio" checked name="scantype" value="automatic">自动扫描
+                    <input type="radio" name="scantype" value="manual">手动扫描
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div>
+            <div id="div-block">
+                <div id="div-name">
+                    <label>指定IP</label>
+                </div>
+
+                <input disabled id="ele-value1" value="0.0.0.0">
+            </div>
+
+            <div id="div-block">
+                <div id="div-name">
+                    <label>指定端口</label>
+                </div>
+
+                <input disabled id="ele-value2" value="47808">
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div>
+            <div id="div-block">
+                <div id="div-name">
+                    <label>设备ID</label>
+                </div>
+
+                <input disabled id="ele-value1" value="-">
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
+        </div>
+    </div>
+</body>
+
+<style>
+    body {
+        background-color: rgb(37, 40, 51);
+    }
+
+    #div-block {
+        float: left;
+    }
+
+    #div-name {
+        color: rgba(240, 244, 255, 0.56);
+        margin-top: 16px;
+        margin-left: 24px;
+    }
+
+    #ele-value {
+        color: rgb(240, 244, 255);
+        background-color: rgb(12, 14, 20);
+        margin-top: 8px;
+        margin-left: 16px;
+        height: 28px;
+        width: 96px;
+        border: 1px solid rgba(240, 244, 255, 0.16);
+        border-radius: 3px;
+        padding-left: 5px;
+    }
+
+    #ele-value1 {
+        color: rgb(240, 244, 255);
+        background-color: rgb(240, 244, 255, 0.16);
+        margin-top: 8px;
+        margin-left: 16px;
+        height: 28px;
+        width: 185px;
+        border: 1px solid rgba(240, 244, 255, 0.16);
+        border-radius: 3px;
+        padding-left: 5px;
+    }
+
+    #ele-value2 {
+        color: rgb(240, 244, 255);
+        background-color: rgb(240, 244, 255, 0.16);
+        margin-top: 8px;
+        margin-left: 16px;
+        height: 28px;
+        width: 96px;
+        border: 1px solid rgba(240, 244, 255, 0.16);
+        border-radius: 3px;
+        padding-left: 5px;
+    }
+
+    #sel-value {
+        color: rgb(240, 244, 255);
+        background-color: rgb(12, 14, 20);
+        margin-top: 8px;
+        margin-left: 16px;
+        height: 32px;
+        width: 192px;
+        border: 1px solid rgba(240, 244, 255, 0.16);
+        border-radius: 3px;
+    }
+
+    #div-scantype {
+        color: rgba(240, 244, 255, 0.56);
+        margin-top: 8px;
+        margin-left: 16px;
+        color: rgb(240, 244, 255);
+    }
+</style>
+
+</html>

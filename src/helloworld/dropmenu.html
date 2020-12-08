@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="show = !show">确定</button>
+        <label>{{show}}</label>
+
+        <ul id="div-menu" :class="menudisplay">
+            <li>{{message}}</li>
+            <li>{{message}}</li>
+            <li>{{message}}</li>
+        </ul>
+    </div>
+
+    <h1>Hidadsadsdafhdsakjv fd vfdavk dab fdvfd dvafdvfdsvdsjfdsfjdsafjdskfjldskjfljdsafl</h1>
+</body>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: "Hello World!",
+            show: false,
+        },
+        computed:{
+            menudisplay() {
+                return this.show ? 'invalid' : 'valid';
+            }
+        },
+    });
+</script>
+
+<style>
+    div{
+		width: 200px;
+		margin: 10px auto;
+        /* border: 5px solid red; */
+    }
+
+    #div-menu{
+        text-align: left;
+        position:absolute;
+        background-color: Blue;
+        z-index: 1;
+        /* border: 5px solid red; */
+    }
+
+    #div-menu.invalid{
+        visibility: hidden;
+    }
+    #div-menu.valid{
+        visibility:visible;
+    }
+</style>
+</html>
