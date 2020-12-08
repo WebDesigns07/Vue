@@ -15,6 +15,7 @@ export default {
     console.log("Weathers component created.");
     axios.get("http://192.168.0.120:8084/WeatherForecast").then((res) => {
       console.log(res);
+      console.log(res.data);
     });
   },
 };
