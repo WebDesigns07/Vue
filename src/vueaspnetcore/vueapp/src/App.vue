@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TextField v-model="firstName" label="First Name" textLimit="15"></TextField>
+    <TextField v-model="firstName" label="First Name" v-bind:textLimit="15"></TextField>
     <TextField v-model="secondName" label="Second Name" :textLimit="15"></TextField>
 
     <SelectField 
@@ -17,15 +17,18 @@
     :options="ageList">
     </SelectField>
 
-      <div>
-        {{gender}} - {{age}}
-      </div>
+    <TextAreaField label="Bio" v-model="bio" :textLimit="255" resize="vertical" autoResize></TextAreaField>
+
+    <Weathers></Weathers>
+
   </div>
 </template>
 
 <script>
 import TextField from "./components/TextField";
 import SelectField from "./components/SelectField";
+import TextAreaField from "./components/TextAreaField";
+import Weathers from './pages/Weathers';
 
 export default {
   name: "App",
@@ -34,12 +37,15 @@ export default {
       firstName: "",
       secondName: "",
       gender: "",
-      age: ""
+      age: "",
+      bio: "",
     };
   },
   components: {
     TextField,
-    SelectField
+    SelectField,
+    TextAreaField,
+    Weathers
   },
   computed: {
     fullName(){
@@ -65,4 +71,5 @@ export default {
 #app {
   margin-top: 60px;
 }
+
 </style>

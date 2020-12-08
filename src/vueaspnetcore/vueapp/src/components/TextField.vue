@@ -27,7 +27,7 @@ export default {
   watch: {
     value: function (newValue, oldValue) {
       if (newValue.length > this.textLimit) this.$emit('input', oldValue);
-    },
+    }
   },
   computed: {
     inputCount() {
@@ -38,8 +38,8 @@ export default {
     },
     validationClass() {
       return this.isEmpty ? "invalid" : "valid";
-    },
-  },
+    }
+  }
 };
 </script>
 
