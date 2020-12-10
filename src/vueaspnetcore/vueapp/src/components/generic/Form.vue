@@ -1,11 +1,11 @@
 <template>
   <div>
-    <slot name="summary" v-bind:errors="errorList">
+    <slot v-if="summary" name="summary" v-bind:errors="errorList">
+      <div class="error-summary">
         <h3>Default Summary</h3>
-      <div v-if="summary" class="error-summary">
-        <div v-for="error in errorList" :key="`error-${error}`">
-          {{ error }}
-        </div>
+        <ul>
+          <li v-for="error in errorList" :key="`error-${error}`">{{ error }}</li>
+        </ul>
       </div>
     </slot>
     <slot> </slot>
@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: "a-form",
   props: {
     value: {
       required: true,
