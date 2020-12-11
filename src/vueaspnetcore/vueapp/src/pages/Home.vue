@@ -89,6 +89,21 @@ export default {
       return result;
     },
   },
+  // keep-alive组件的原理
+  // beforeRouteEnter(to, from, next) {
+  //   let formString = localStorage.getItem("home-form") || null;
+
+  //   console.log(formString);
+  //   next((vm) => {
+  //     if (formString !== null && formString !== "")
+  //       vm.form = JSON.parse(formString);
+  //   });
+  // },
+  // beforeRouteLeave(to, from, next) {
+  //   let formString = JSON.stringify(this.form);
+  //   localStorage.setItem("home-form", formString);
+  //   next();
+  // },
 };
 </script>
 

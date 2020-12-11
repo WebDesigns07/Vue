@@ -13,7 +13,7 @@
       v-model="form.password"
       :textLimit="15"
     />
-    <button>Login</button>
+    <button @click="login">Login</button>
   </a-form>
 </template>
 
@@ -33,6 +33,11 @@ export default {
       formValid: false
     };
   },
+  methods:{
+    login(){
+      this.$router.push("profile");
+    }
+  }
 };
 </script>
 
