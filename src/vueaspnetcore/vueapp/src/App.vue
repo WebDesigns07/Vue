@@ -1,124 +1,23 @@
 <template>
   <div id="app">
-    <TextField
-      v-model="form.firstName"
-      label="First Name"
-      v-bind:textLimit="15"
-      :rules="firstNameRules"
-    ></TextField>
-    <TextField
-      v-model="form.secondName"
-      label="Second Name"
-      :textLimit="15"
-      :rules="lastNameRules"
-    ></TextField>
+    <div>
+      <router-link to="/">Home</router-link>
+      <router-link to="/login">Login</router-link>
+    </div>
+    <router-view />
 
-    <SelectField
-      label="Gender"
-      v-model="form.gender"
-      placeholder="Select Your Gender"
-      :options="genderList"
-    >
-    </SelectField>
-
-    <SelectField
-      label="Age"
-      v-model="form.age"
-      placeholder="Select Your Age"
-      :options="ageList"
-    >
-    </SelectField>
-
-    <TextAreaField
-      label="Bio"
-      v-model="form.bio"
-      :textLimit="255"
-      resize="vertical"
-      autoResize
-    ></TextAreaField>
-
-    <button v-if="formValid">Submit</button>
-
-    <div>{{ form }}</div>
-    {{ errors }}
-    <div></div>
-    {{formValid}}
+    <button @click="jumpPage">Go to login page</button>
   </div>
 </template>
 
 <script>
-import TextField from "./components/TextField";
-import SelectField from "./components/SelectField";
-import TextAreaField from "./components/TextAreaField";
-
 export default {
   name: "App",
-  data() {
-    return {
-      firstNameRules: [
-        (v) => v.length > 0 || "First name is required",
-        (v) => v.length < 15 || "First name has to be less than 15 chatacters",
-        (v) => !/\s/.test(v) || "No white spaces buddy",
-      ],
-      lastNameRules: [
-        (v) => v.length > 0 || "Second name is required",
-        (v) => v.length < 15 || "Second name has to be less than 15 chatacters",
-        (v) => !/\s/.test(v) || "No white spaces buddy",
-      ],
-      form: {
-        firstName: "",
-        secondName: "",
-        gender: "",
-        age: "",
-        bio: "",
-      },
-      // errors: [],
-      // 注意{}和[]的区别
-      errors: {}
-    };
-  },
-  components: {
-    TextField,
-    SelectField,
-    TextAreaField,
-  },
-  mounted() {
-    this.$children
-      .filter((c) => c.valid !== undefined)
-      .forEach((c) => {
-        c.$watch("valid", (v) => {
-          console.info("Custom Watcher: ", c, v);
-          // this.errors[c._uid] = v;
-          // 立即更新属性
-          this.$set(this.errors, c._uid, v);
-        },
-        { immediate: true });
-      });
-  },
-  computed: {
-    fullName() {
-      return this.firstName + " " + this.secondName;
-    },
-    genderList() {
-      return [
-        { value: "0", text: "Male" },
-        { value: "1", text: "Female" },
-        { value: "2", text: "Other" },
-      ];
-    },
-    ageList() {
-      let result = [];
-      for (let i = 16; i < 65; i++) result.push({ value: i, text: i });
-      return result;
-    },
-    errorList() {
-      var err = Object.values(this.errors).filter(v => v !== true);
-      return err;
-    },
-    formValid() {
-      return this.errorList.length === 0;
+  methods: {
+    jumpPage() {
+      this.$router.push('login');
     }
-  },
+  }
 };
 </script>
 
