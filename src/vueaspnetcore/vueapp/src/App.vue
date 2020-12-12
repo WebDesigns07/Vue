@@ -1,69 +1,48 @@
 <template>
   <div id="app">
-    <TextField v-model="firstName" label="First Name" v-bind:textLimit="15"></TextField>
-    <TextField v-model="secondName" label="Second Name" :textLimit="15"></TextField>
+    <div>
+      <router-link to="/">Home</router-link>
+      <router-link to="/login">Login</router-link>
+      <router-link to="/profile">Profile</router-link>
+    </div>
 
-    <SelectField 
-    label="Gender" 
-    v-model="gender" 
-    placeholder="Select Your Gender" 
-    :options="genderList">
-    </SelectField>
-
-    <SelectField 
-    label="Age" 
-    v-model="age" 
-    placeholder="Select Your Age" 
-    :options="ageList">
-    </SelectField>
-
-    <TextAreaField label="Bio" v-model="bio" :textLimit="255" resize="vertical" autoResize></TextAreaField>
-
-    <Weathers></Weathers>
-
+    <div class="app">
+      <div class="main">
+        <keep-alive>
+          <router-view />
+        </keep-alive>
+      </div>
+      <div class="menu">
+        <router-link v-for="p in profiles" :key="p.id"
+        :to="`/profile/${p.firstName}`">
+          {{ p.firstName }} - {{ p.lastName }}
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import TextField from "./components/TextField";
-import SelectField from "./components/SelectField";
-import TextAreaField from "./components/TextAreaField";
-import Weathers from './pages/Weathers';
-
 export default {
   name: "App",
   data() {
     return {
-      firstName: "",
-      secondName: "",
-      gender: "",
-      age: "",
-      bio: "",
+      profiles: [],
     };
   },
-  components: {
-    TextField,
-    SelectField,
-    TextAreaField,
-    Weathers
+  created() {
+    this.loadProfiles();
+    this.$eventBus.$on("created-profile", data => {
+      this.profiles.push(data);
+    });
   },
-  computed: {
-    fullName(){
-      return this.firstName + " " + this.secondName;
+  methods: {
+    loadProfiles() {
+      this.$api.get("Profile").then((res) => {
+        this.profiles = res.data;
+      });
     },
-    genderList(){
-      return [
-        { value:"0", text:"Male"},
-        { value:"1", text:"Female"},
-        { value:"2", text:"Other"} 
-      ];
-    },
-    ageList(){
-      let result = [];
-      for (let i = 16; i < 65; i++) result.push({ value: i, text: i });
-      return result;
-    }
-  }
+  },
 };
 </script>
 
@@ -72,4 +51,12 @@ export default {
   margin-top: 60px;
 }
 
+a {
+  padding: 0 5px;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+}
 </style>

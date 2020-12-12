@@ -1,5 +1,5 @@
 {
-  "name": "vue-app",
+  "name": "excel",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "exceljs": "^4.2.0",
+    "js-xlsx": "^0.8.22",
     "vue": "^2.6.11",
-    "vue-router": "^3.4.9"
+    "vue-json-excel": "^0.3.0",
+    "xlsx": "^0.16.9",
+    "xlsx-style": "^0.8.13"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://sheetjs.com/demos/writexlsx.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SheetJS JS-XLSX In-Browser Write Demo</title>
+
+</head>
+<body>
+<!--[if gt IE 9]-->
+<script type="text/javascript" async="" src="./SheetJS JS-XLSX In-Browser Write Demo_files/ga.js.下载"></script><script type="text/javascript" src="./SheetJS JS-XLSX In-Browser Write Demo_files/shim.min.js.下载"></script><script type="text/vbscript" language="vbscript">
+IE_GetProfileAndPath_Key = "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\"
+Function IE_GetProfileAndPath(key): Set wshell = CreateObject("WScript.Shell"): IE_GetProfileAndPath = wshell.RegRead(IE_GetProfileAndPath_Key & key): IE_GetProfileAndPath = wshell.ExpandEnvironmentStrings("%USERPROFILE%") & "!" & IE_GetProfileAndPath: End Function
+Function IE_SaveFile_Impl(FileName, payload): Dim data, plen, i, bit: data = CStr(payload): plen = Len(data): Set fso = CreateObject("Scripting.FileSystemObject"): fso.CreateTextFile FileName, True: Set f = fso.GetFile(FileName): Set stream = f.OpenAsTextStream(2, 0): For i = 1 To plen Step 3: bit = Mid(data, i, 2): stream.write Chr(CLng("&h" & bit)): Next: stream.Close: IE_SaveFile_Impl = True: End Function
+</script><script type="text/vbscript" language="vbscript">
+Function IE_LoadFile_Impl(FileName): Dim out(), plen, i, cc: Set fso = CreateObject("Scripting.FileSystemObject"): Set f = fso.GetFile(FileName): Set stream = f.OpenAsTextStream(1, 0): plen = f.Size: ReDim out(plen): For i = 1 To plen Step 1: cc = Hex(Asc(stream.read(1))): If Len(cc) < 2 Then: cc = "0" & cc: End If: out(i) = cc: Next: IE_LoadFile_Impl = Join(out,""): End Function
+</script>
+<script type="text/javascript" src="./SheetJS JS-XLSX In-Browser Write Demo_files/xlsx.full.min.js.下载"></script>
+<!--[endif]-->
+<!--[if lte IE 9]>
+<script type="text/javascript" src="shim.min.js"></script>
+<script type="text/javascript" src="xlsx.full.min.js"></script>
+<![endif]-->
+
+<script>
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+/* original data */
+var filename = "write.xlsx";
+var data = [[1,2,3],[true, false, null, "sheetjs"],["foo","bar",new Date("2014-02-19T14:30Z"), "0.3"], ["baz", null, "qux"]]
+var ws_name = "SheetJS";
+ 
+if(typeof console !== 'undefined') console.log(new Date());
+var wb = XLSX.utils.book_new(), ws = XLSX.utils.aoa_to_sheet(data);
+ 
+/* add worksheet to workbook */
+XLSX.utils.book_append_sheet(wb, ws, ws_name);
+
+/* write workbook */
+if(typeof console !== 'undefined') console.log(new Date());
+XLSX.writeFile(wb, filename);
+if(typeof console !== 'undefined') console.log(new Date());
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36810333-1']);
+  _gaq.push(['_setDomainName', 'sheetjs.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</body></html>

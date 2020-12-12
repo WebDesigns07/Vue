@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" class="appClass">
+        <div class="ele0">确定</div>
+        <div class="ele1">{{message}}</div>
+    </div>
+    
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: "Hello World!",
+            show: false,
+        },
+        computed:{
+            menudisplay() {
+                return this.show ? 'invalid' : 'valid';
+            }
+        },
+    });
+</script>
+
+<style>
+    /* #app{
+        display: block;
+    }
+    div{
+        text-align:center;
+    }
+    div:nth-child(2n+1) {
+        display: block;
+    }
+    div:nth-child(2n) {
+        display: none;
+    }
+    #app:hover .ele1{
+        display:block;
+    } */
+
+    .ele1{
+        display: none;
+    }
+
+    .appClass:hover .ele1{
+        display: block;
+    }
+</style>
+
+</body>
+</html>
