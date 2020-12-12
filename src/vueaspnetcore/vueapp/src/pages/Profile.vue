@@ -15,14 +15,27 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   computed: {
+    ...mapGetters('profiles', {
+      getProfile: "GET_PROFILE"
+    }),
     profile() {
-      let profiles = this.$store.getters.GET_PROFILES;
-      if (profiles.length === 0) return null;
-      
       let name = this.$route.params.name;
-      return profiles.filter(profile => profile.firstName === name)[0];
+      // return this.$store.getters.GET_PROFILE(name);
+      return this.getProfile(name);
+
+      // // let profiles = this.$store.getters.GET_PROFILES;
+      // let profiles = this.$store.state.profiles;
+      // if (profiles.length === 0) return null;
+      
+      // let name = this.$route.params.name;
+      // let profile = profiles.filter(profile => profile.firstName === name)[0];
+
+      // // 隐藏bug，切换到别到页面后，name路由值变为undefined。 
+      // return profile;
     }
   },
   // data() {

@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from './router';
 import axios from "axios";
-import { store } from "./stores/profiles";
+import { store } from "./stores/store";
 import "./components/generic/index.js";
 
 Vue.config.productionTip = false;

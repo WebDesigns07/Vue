@@ -5,7 +5,6 @@
       <router-link to="/login">Login</router-link>
       <router-link to="/profile">Profile</router-link>
     </div>
-
     <div class="app">
       <div class="main">
         <keep-alive>
@@ -13,8 +12,11 @@
         </keep-alive>
       </div>
       <div class="menu">
-        <router-link v-for="p in profiles" :key="p.id"
-        :to="`/profile/${p.firstName}`">
+        <router-link
+          v-for="p in profiles"
+          :key="p.id"
+          :to="`/profile/${p.firstName}`"
+        >
           {{ p.firstName }} - {{ p.lastName }}
         </router-link>
       </div>
@@ -23,19 +25,34 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   name: "App",
   created() {
-    this.$store.dispatch("LOAD_PROFILES", this.$api);
+    this.loadProfiles(this.$api);
+    // this.$store.dispatch("LOAD_PROFILES", this.$api);
+
     // this.$eventBus.$on("created-profile", data => {
     //   this.profiles.push(data);
     // });
   },
+  methods: {
+    ...mapActions("profiles", {
+      loadProfiles: "LOAD_PROFILES",
+    }),
+  },
   computed: {
-    profiles() {
-      return this.$store.getters.GET_PROFILES;
-    }
-  }
+    ...mapState("profiles", {
+      profiles: (state) => state.profiles,
+      // Other action mappings
+    }),
+    // Other statemappings
+
+    // profiles() {
+    //   return this.$store.profiles;
+    // }
+  },
 };
 </script>
 
