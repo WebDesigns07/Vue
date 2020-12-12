@@ -43,7 +43,9 @@
       autoResize
     />
 
-    <a-sbutton :loading="loading" @click="createProfile" :disabled="!formValid || loading">Bobo</a-sbutton>
+    <a-sbutton :loading="loading" @click="createProfile" :disabled="!formValid || loading">
+      Create Profile
+    </a-sbutton>
   </a-form>
 </template>
 

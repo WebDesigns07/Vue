@@ -46,21 +46,21 @@ const router = new Router({
     ]
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.auth)) {
-        var authenticated = false;
-        // check if authenticated
-        if (authenticated) {
-            next();
-        } else {
-            // redirect to login
-            if (from.name !== "login")
-                router.push("login");
-        }
-    }
-    else {
-        next();
-    }
-});
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.auth)) {
+//         var authenticated = false;
+//         // check if authenticated
+//         if (authenticated) {
+//             next();
+//         } else {
+//             // redirect to login
+//             if (from.name !== "login")
+//                 router.push("login");
+//         }
+//     }
+//     else {
+//         next();
+//     }
+// });
 
 export default router;
