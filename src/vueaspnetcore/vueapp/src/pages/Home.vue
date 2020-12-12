@@ -81,7 +81,8 @@ export default {
           .then(res => {
             // todo store result in vuex
             this.loading = false;
-            this.$eventBus.$emit('created-profile', res.data);
+            this.$store.commit("ADD_PROFILE", res.data);
+            // this.$eventBus.$emit('created-profile', res.data);
           });
     }
   },

@@ -25,24 +25,17 @@
 <script>
 export default {
   name: "App",
-  data() {
-    return {
-      profiles: [],
-    };
-  },
   created() {
-    this.loadProfiles();
-    this.$eventBus.$on("created-profile", data => {
-      this.profiles.push(data);
-    });
+    this.$store.dispatch("LOAD_PROFILES", this.$api);
+    // this.$eventBus.$on("created-profile", data => {
+    //   this.profiles.push(data);
+    // });
   },
-  methods: {
-    loadProfiles() {
-      this.$api.get("Profile").then((res) => {
-        this.profiles = res.data;
-      });
-    },
-  },
+  computed: {
+    profiles() {
+      return this.$store.getters.GET_PROFILES;
+    }
+  }
 };
 </script>
 

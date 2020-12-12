@@ -16,30 +16,39 @@
 
 <script>
 export default {
-  data() {
-    return {
-      profile: {},
-    };
+  computed: {
+    profile() {
+      let profiles = this.$store.getters.GET_PROFILES;
+      if (profiles.length === 0) return null;
+      
+      let name = this.$route.params.name;
+      return profiles.filter(profile => profile.firstName === name)[0];
+    }
   },
-  watch: {
-    "$route.params.name": {
-      immediate: true,
-      handler(name) {
-        this.loadProfile(name);
-      },
-    },
-  },
-  methods: {
-    loadProfile(name) {
-      //   let name = this.$route.params.name;
-      console.log(this.profile);
-      name === undefined ? "" : name;
-      this.$api.get("Profile/" + name).then((res) => {
-        console.log(this.profile);
-        this.profile = res.data;
-      });
-    },
-  },
+  // data() {
+  //   return {
+  //     profile: {},
+  //   };
+  // },
+  // // watch: {
+  // //   "$route.params.name": {
+  // //     immediate: true,
+  // //     handler(name) {
+  // //       this.loadProfile(name);
+  // //     },
+  // //   },
+  // // },
+  // methods: {
+  //   loadProfile(name) {
+  //     //   let name = this.$route.params.name;
+  //     console.log(this.profile);
+  //     name === undefined ? "" : name;
+  //     this.$api.get("Profile/" + name).then((res) => {
+  //       console.log(this.profile);
+  //       this.profile = res.data;
+  //     });
+  //   },
+  // },
   //   created() {
   //     let name = this.$route.params.name;
   //     this.$api.get("Profile/" + name).then((res) => {
