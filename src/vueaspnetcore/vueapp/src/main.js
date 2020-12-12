@@ -7,7 +7,7 @@ import axios from "axios";
 Vue.config.productionTip = false;
 
 const api = axios.create({
-  baseURL: "http://192.168.0.120:8084"
+  baseURL: "https://192.168.0.138:5001"
 });
 
 const axiosPlugin = {
@@ -15,6 +15,8 @@ const axiosPlugin = {
     Vue.prototype.$api = api;
   }
 }
+
+Vue.prototype.$eventBus = new Vue();
 
 Vue.use(axiosPlugin);
 

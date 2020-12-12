@@ -15,8 +15,8 @@
       :rules="firstNameRules"
     />
     <a-input
-      v-model="form.secondName"
-      label="Second Name"
+      v-model="form.lastName"
+      label="Last Name"
       :textLimit="15"
       :rules="lastNameRules"
     />
@@ -43,8 +43,7 @@
       autoResize
     />
 
-    <button v-if="formValid">Submit</button>
-    <span v-else>Please fill out the form</span>
+    <a-sbutton :loading="loading" @click="createProfile" :disabled="!formValid || loading">Bobo</a-sbutton>
   </a-form>
 </template>
 
@@ -58,19 +57,31 @@ export default {
         (v) => !/\s/.test(v) || "No white spaces buddy",
       ],
       lastNameRules: [
-        (v) => v.length > 0 || "Second name is required",
-        (v) => v.length < 15 || "Second name has to be less than 15 chatacters",
+        (v) => v.length > 0 || "Last name is required",
+        (v) => v.length < 15 || "Last name has to be less than 15 chatacters",
         (v) => !/\s/.test(v) || "No white spaces buddy",
       ],
       form: {
         firstName: "",
-        secondName: "",
+        lastName: "",
         gender: "",
         age: "",
         bio: "",
       },
       formValid: false,
+      loading: false,
     };
+  },
+  methods: {
+    createProfile() {
+      this.loading = true;
+      this.$api.post("profile", this.form)
+          .then(res => {
+            // todo store result in vuex
+            this.loading = false;
+            this.$eventBus.$emit('created-profile', res.data);
+          });
+    }
   },
   computed: {
     fullName() {
