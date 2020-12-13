@@ -76,6 +76,9 @@ export default {
       // loading: false,
     };
   },
+  created() {
+    console.log("home page reached");
+  },
   methods: {
     ...mapActions('profiles', {
       createProfile: 'CREATE_PROFILE'

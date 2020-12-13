@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="loader" v-if="!ready">Loading...</div>
     <div>
       <router-link to="/">Home</router-link>
       <router-link to="/login">Login</router-link>
@@ -30,6 +31,13 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "App",
   created() {
+    console.log("app init");
+    // console.dir(this.$store.state.appReady);
+    // this.$store.commit("READY_APP");
+    // console.dir(this.$store.state.appReady);
+
+    this.init();
+
     this.loadProfiles(this.$api);
     // this.$store.dispatch("LOAD_PROFILES", this.$api);
 
@@ -38,11 +46,17 @@ export default {
     // });
   },
   methods: {
+    ...mapActions({
+      init: "INIT_APP",
+    }),
     ...mapActions("profiles", {
       loadProfiles: "LOAD_PROFILES",
     }),
   },
   computed: {
+    ...mapState({
+      ready: (state) => state.appReady,
+    }),
     ...mapState("profiles", {
       profiles: (state) => state.profiles,
       // Other action mappings
@@ -68,5 +82,14 @@ a {
 .app {
   display: flex;
   flex-direction: row;
+}
+
+.loader {
+  background: #eee;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 </style>
