@@ -34,7 +34,7 @@ namespace dotnet_api.Controllers
         [HttpPost]
         public Profile CreateProfile(Profile profile)
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(500);
             _profileAdmin.AddProfile(profile);
             return profile;
         }

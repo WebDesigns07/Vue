@@ -15,31 +15,53 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  data() {
-    return {
-      profile: {},
-    };
+  computed: {
+    ...mapGetters('profiles', {
+      getProfile: "GET_PROFILE"
+    }),
+    profile() {
+      let name = this.$route.params.name;
+      // return this.$store.getters.GET_PROFILE(name);
+      return this.getProfile(name);
+
+      // // let profiles = this.$store.getters.GET_PROFILES;
+      // let profiles = this.$store.state.profiles;
+      // if (profiles.length === 0) return null;
+      
+      // let name = this.$route.params.name;
+      // let profile = profiles.filter(profile => profile.firstName === name)[0];
+
+      // // 隐藏bug，切换到别到页面后，name路由值变为undefined。 
+      // return profile;
+    }
   },
-  watch: {
-    "$route.params.name": {
-      immediate: true,
-      handler(name) {
-        this.loadProfile(name);
-      },
-    },
-  },
-  methods: {
-    loadProfile(name) {
-      //   let name = this.$route.params.name;
-      console.log(this.profile);
-      name === undefined ? "" : name;
-      this.$api.get("Profile/" + name).then((res) => {
-        console.log(this.profile);
-        this.profile = res.data;
-      });
-    },
-  },
+  // data() {
+  //   return {
+  //     profile: {},
+  //   };
+  // },
+  // // watch: {
+  // //   "$route.params.name": {
+  // //     immediate: true,
+  // //     handler(name) {
+  // //       this.loadProfile(name);
+  // //     },
+  // //   },
+  // // },
+  // methods: {
+  //   loadProfile(name) {
+  //     //   let name = this.$route.params.name;
+  //     console.log(this.profile);
+  //     name === undefined ? "" : name;
+  //     this.$api.get("Profile/" + name).then((res) => {
+  //       console.log(this.profile);
+  //       this.profile = res.data;
+  //     });
+  //   },
+  // },
   //   created() {
   //     let name = this.$route.params.name;
   //     this.$api.get("Profile/" + name).then((res) => {

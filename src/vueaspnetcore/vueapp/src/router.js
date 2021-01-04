@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { store } from './stores/store';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -45,6 +46,41 @@ const router = new Router({
         }
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    function proceed() {
+        if (to.matched.some(record => record.meta.auth)) {
+            var authenticated = false;
+            // check if authenticated
+            if (authenticated) {
+                // Login success
+                next();
+            } else {
+                // redirect to login if the page needs authenticate and not logined
+                // if (from.name !== "login")
+                //     router.push("login");
+
+                next();
+            }
+        }
+        else {
+            next();
+        }
+    }
+
+    if (!store.state.appReady) {
+        store.watch(
+            state => state.appReady,
+            ready => {
+                if (ready) {
+                    proceed();
+                }
+            }
+        )
+    } else {
+        proceed();
+    }
+});
 
 // router.beforeEach((to, from, next) => {
 //     if (to.matched.some(record => record.meta.auth)) {
